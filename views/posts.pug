@@ -1,0 +1,54 @@
+extends layout
+
+block content
+ 
+  nav
+    div(class='nav-wrapper')
+      a(class='left brand-logo') LUT-Blog
+      a(href='#', data-target='mobile-demo',class='right sidenav-trigger')
+        i(class='material-icons') menu
+      ul(id='nav-mobile', class='right hide-on-med-and-down')
+        li
+          a(href='./posts') Community
+        li
+          a(href='./mypage') My Page
+        li
+          a(href='./') Log Out
+
+  ul(class='sidenav', id='mobile-demo')
+    li
+      a(href='./posts') Community
+    li
+      a(href='./mypage') My Page
+
+  div(class='row')
+  form(method='POST' action='/posts/create') New Post
+            div.form-group(class='row')
+              i(class='medium material-icons circle col') account_circle
+              div(class='col')
+                label(for='name') Name:
+                input#name.form-control(type='text', placeholder='Your name' name='author')
+            div.form-group(class='row')
+              i(class='medium material-icons circle col') forum
+              div(class='col')
+                label(for='content') Post:
+                input#content.form-control(type='text' name='content')
+            button.btn.btn-primary(type='submit') Post 
+              i(class='material-icons') send
+
+  ul(class='collection with-header')
+    li(class='collection-header')
+      h4= title
+  each post in post_list
+    li(class='collection-item avatar') 
+      div(class='row')
+        div(class='col')
+          i(class='medium material-icons circle') account_circle
+        div(class='col')
+          span #{post.author}
+          p #{post.content}
+
+  else
+    li 
+      i(class='small material-icons circle') hourglass_empty
+      span No posts yet.
