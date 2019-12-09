@@ -29,13 +29,13 @@ router.post(
       .equals(req.body.password);
     var errors = req.validationErrors();
     if (errors) {
-      res.render("../", {
+      res.render("/", {
         errors: errors
       });
     } else {
     }
     //Redirect (piece of shit that dosnt wanna work!)
-    res.redirect("../");
+    res.redirect("/");
   }
 );
 
