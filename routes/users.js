@@ -8,7 +8,7 @@ const { sanitizeBody } = require("express-validator");
 
 //New User
 router.post(
-  "/signin",
+  "/users/signin",
   sanitizeBody("*")
     .trim()
     .escape(),
