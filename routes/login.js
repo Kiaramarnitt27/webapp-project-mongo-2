@@ -19,8 +19,8 @@ router.post(
 
     for (var i = 0; i < users_and_info.length; i++) {
       if (
-        users_and_info[i][0] === login_username &&
-        users_and_info[i][2] === login_password
+        users_and_info[i].username === login_username &&
+        users_and_info[i].password === login_password
       ) {
         req.app.set("user", login_username);
         res.redirect("/posts");
