@@ -9,8 +9,11 @@ block content
           a(href='./') 
             i(class='material-icons') home
   h4= title
-
-
+  
+  if signin_errors
+    ul
+      each error in signin_errors
+        li #{error.msg}
 
   div(class='row') 
   form(method='POST' action='/signin/create' class='col s12 m6 l6' ) 
@@ -18,13 +21,7 @@ block content
               div(class='col s2 m2 l2')
                 i(class='medium material-icons circle') person      
               div(class='col s10 m4 l4')
-                input.form-control(type='text', placeholder='Name' name='name' class='validate')
-                label(for='name') Name:
-            div.form-group(class='row')
-              div(class='col s2 m2 l2')
-                i(class='medium material-icons circle') person      
-              div(class='col s10 m4 l4')
-                input.form-control(type='text', placeholder='New Username' name='user' class='validate')
+                input.form-control(type='text', placeholder='New Username' name='username' class='validate')
                 label(for='user') User Name:
             div.form-group(class='row')
               div(class='col s2 m2 l2')

@@ -42,12 +42,13 @@ app.use("/signin", signinRouter);
 app.use("/login", loginRouter);
 
 // Setting up a global var for data storage - this is extremely poor and hacky way, but works
-
 app.set("poststore", []);
 app.set("user");
+app.set("userstore", []);
+
 //To be changed with MongoDB
 mongoose.connect(
-  "mongodb+srv://user:<lut2019>@webapp-wvh1z.mongodb.net/test?retryWrites=true&w=majority"
+  "mongodb+srv://user:lut2019@webapp-wvh1z.mongodb.net/test?retryWrites=true&w=majority"
 );
 var db = mongoose.connection;
 

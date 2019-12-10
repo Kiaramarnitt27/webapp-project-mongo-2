@@ -8,8 +8,12 @@ block content
         li
           a(href='./') 
             i(class='material-icons') home
-            
+
   h4= title
+
+  if success_msg
+    p success_msg
+
   div(class=row)   
   form(method='POST' action='/login/check' class='col s12 m6' ) 
             div(class='row')
