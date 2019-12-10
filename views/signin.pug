@@ -8,14 +8,14 @@ block content
         li
           a(href='./') 
             i(class='material-icons') home
-  h4= title
+  h5= title
   
   if signin_errors
     ul
       each error in signin_errors
         li #{error.msg}
 
-  div(class='row') 
+  div(class='row center') 
   form(method='POST' action='/signin/create' class='col s12 m6 l6' ) 
             div.form-group(class='row')
               div(class='col s2 m2 l2')

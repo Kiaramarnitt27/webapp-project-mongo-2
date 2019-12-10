@@ -4,14 +4,12 @@ block content
   nav
     div(class='nav-wrapper')
       a(class='left brand-logo')= title
-  div(class='row')
-    p Welcome to #{title}! See what is happening now
-    p Join #{title} today
+  div(class='row center')
+    h5 Welcome to #{title}! See what is happening now
+    h5 Join #{title} today
 
-
-
-  div(class='row') 
+  div(class='row center') 
     div(class='col s6')
-      a(class='waves-effect waves-light btn', href='./signin') Sign In
-    div(class='col s6')
-      a(class='waves-effect waves-light btn', href='./login') Log In
+      a(class='right waves-effect waves-light btn', href='./signin') Sign In
+    div(class='left col s6')
+      a(class='left waves-effect waves-light btn', href='./login') Log In
