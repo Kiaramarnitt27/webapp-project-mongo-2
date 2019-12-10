@@ -14,11 +14,21 @@ router.post(
     .trim()
     .escape(),
   function(req, res, next) {
-    passport.authenticate("local", {
-      successRedirect: "/community",
-      failureRedirect: "/login",
-      failureFlash: true
-    })(req, res, next);
+    var users_and_info = req.app.get("userstore");
+    const { login_username, login_password } = req.body;
+
+    for (var i = 0; i < users_and_info.length; i++) {
+      if (
+        users_and_info[i][0] === login_username &&
+        users_and_info[i][2] === login_password
+      ) {
+        req.app.set("user", login_username);
+        res.redirect("/posts");
+      }
+    }
+    res.render("login", {
+      message: "Wrong username or password"
+    });
   }
 );
 

@@ -6,7 +6,6 @@ const User = require("../models/db");
 const { sanitizeBody } = require("express-validator");
 
 router.get("/", function(req, res, next) {
-  var users_and_info = req.app.get("userstore");
   res.render("signin", { title: "Sign In" });
 });
 

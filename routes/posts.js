@@ -9,10 +9,12 @@ const { sanitizeBody } = require("express-validator");
 router.get("/", function(req, res, next) {
   // Retreiving the posts from the global var
   var authors_and_posts = req.app.get("poststore");
+  var curr_user = req.app.get("user");
 
   // Just send the array of objects to the browser
   res.render("posts", {
     title: "Community Posts",
+    username: curr_user,
     post_list: authors_and_posts
   });
 });
@@ -27,12 +29,12 @@ router.post(
     .escape(),
   function(req, res, next) {
     var local_content = req.body.content;
-    var local_author = req.body.author;
+    var curr_user = req.app.get("user");
     console.log("We got content: " + local_content);
-    console.log("from author: " + local_author);
+    console.log("from author: " + curr_user);
 
     req.app.get("poststore").push({
-      author: local_author,
+      author: curr_user,
       content: local_content
     });
 
