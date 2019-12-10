@@ -6,26 +6,27 @@ block content
       a(class='left brand-logo') LUT-Blog
       ul(id='nav-mobile', class='right')
         li
-          a(href='./') 
+          a(href='../') 
             i(class='material-icons') home
 
-  h4= title
+  h5= title
 
   if message
     p #{message}
 
-  div(class=row)   
-  form(method='POST' action='/login/check' class='col s12 m6' ) 
+  div(class= 'row center')   
+  form(method='POST' action='/login/check') 
             div(class='row')
-              div(class='col s2 m2 l2')
+              //-Username
+              div(class='col s2 m2 l1')
                 i(class='medium material-icons circle') person      
-              div(class='input-field col s10 m4 l4')
+              div(class='input-field col s10 m4 l5')
                 input.form-control(type='text', placeholder='New User Name' name='username' class='validate')
                 label(for='name') Name:
-            div(class='row')
-              div(class='col s2 m2 l2')
+              //-Password
+              div(class='col s2 m2 l1')
                 i(class='medium material-icons circle') lock      
-              div(class='input-field col s10 m4 l4')
+              div(class='input-field col s10 m4 l5')
                 label(for='password') Password:
                 input.form-control(type='password', placeholder='Password' name='password' class='validate')
             button.btn.btn-primary(type='submit') Log In

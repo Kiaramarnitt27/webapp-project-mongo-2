@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const passport = require("passport");
 
 // Good validation documentation available at https://express-validator.github.io/docs/
 const { sanitizeBody } = require("express-validator");
@@ -15,7 +14,8 @@ router.post(
     .escape(),
   function(req, res, next) {
     var users_and_info = req.app.get("userstore");
-    const { login_username, login_password } = req.body;
+    var login_username = req.body.username;
+    var login_password = req.body.password;
 
     for (var i = 0; i < users_and_info.length; i++) {
       if (

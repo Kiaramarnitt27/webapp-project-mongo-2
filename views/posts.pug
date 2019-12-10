@@ -5,46 +5,39 @@ block content
   nav
     div(class='nav-wrapper')
       a(class='left brand-logo') LUT-Blog
-      a(href='#', data-target='mobile-demo',class='right sidenav-trigger')
-        i(class='material-icons') menu
-      ul(id='nav-mobile', class='right hide-on-med-and-down')
+      ul(id='nav-mobile', class='right')
         li
           a(href='./posts') Community
         li
           a(href='./mypage') My Page
         li
-          a(href='./') Log Out
-
-  ul(class='sidenav', id='mobile-demo')
-    li
-      a(href='./posts') Community
-    li
-      a(href='./mypage') My Page
+          a(href='./logout') Log Out
 
   div(class='row')
-  form(method='POST' action='/posts/create') New Post
-            div.form-group(class='row')
-              i(class='medium material-icons circle col') account_circle
-              div(class='col')
-                label(for="disabled") #{username} should be here
-            div.form-group(class='row')
-              i(class='medium material-icons circle col') forum
-              div(class='col')
-                label(for='content') Post:
-                input#content.form-control(type='text' name='content')
-            button.btn.btn-primary(type='submit') Post 
-              i(class='material-icons') send
+  form(method='POST' action='/posts/create') 
+            div(class='row')
+              //-User
+              div(class='col s2 m1 l1')
+                i(class='medium material-icons circle') account_circle
+                div
+                  label(for="disabled", class="center") #{username}
+              div(class='col s10 m11 l11')
+                div(class='class="input-field col s10 m10 l10')
+                  label(for='content') Post:
+                  textarea#content.form-control(type='text' name='content' class="materialize-textarea")
+                button.btn.btn-primary(type='submit', class='left btn-floating')
+                  i(class='material-icons') forum
 
   ul(class='collection with-header')
     li(class='collection-header')
-      h4= title
+      h5= title
   each post in post_list
-    li(class='collection-item avatar') 
+    li 
       div(class='row')
-        div(class='col')
-          i(class='medium material-icons circle') account_circle
-        div(class='col')
-          span #{post.author}
+        div(class='col s2 m1 l1')
+          i(class='medium material-icons circle') account_circle   
+        div(class='col s10 m11 s11')
+          span #{post.author}         
           p #{post.content}
 
   else

@@ -9,11 +9,26 @@ const { sanitizeBody } = require("express-validator");
 router.get("/", function(req, res, next) {
   // Retreiving the posts from the global var
   var authors_and_posts = req.app.get("poststore");
+  var curr_user = req.app.get("user");
 
+  if (!curr_user) {
+    res.redirect("../");
+  }
+
+  var myposts = [];
+  for (var i = 0; i < authors_and_posts.length; i++) {
+    if (authors_and_posts[i].author === curr_user) {
+      myposts.push({
+        author: curr_user,
+        content: authors_and_posts[i].content
+      });
+    }
+  }
   // Just send the array of objects to the browser
   res.render("mypage", {
-    title: "My Posts",
-    post_list: authors_and_posts  
+    title: "My Page",
+    username: curr_user,
+    post_list: myposts
   });
 });
 
@@ -27,15 +42,18 @@ router.post(
     .escape(),
   function(req, res, next) {
     var local_content = req.body.content;
-    var local_author = req.body.author;
+    var curr_user = req.app.get("user");
     console.log("We got content: " + local_content);
-    console.log("from author: " + local_author);
+    console.log("from author: " + curr_user);
 
-    req.app.get("poststore").push({
-      author: local_author,
-      content: local_content
-    });
-
+    if (!local_content) {
+      res.render("/mypage");
+    } else {
+      req.app.get("poststore").push({
+        author: curr_user,
+        content: local_content
+      });
+    }
     res.redirect("/mypage");
   }
 );

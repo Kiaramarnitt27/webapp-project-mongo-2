@@ -11,11 +11,14 @@ router.get("/", function(req, res, next) {
   var authors_and_posts = req.app.get("poststore");
   var curr_user = req.app.get("user");
 
+  if (!curr_user) {
+    res.redirect("../");
+  }
   // Just send the array of objects to the browser
   res.render("posts", {
     title: "Community Posts",
     username: curr_user,
-    post_list: authors_and_posts
+    post_list: authors_and_posts.reverse()
   });
 });
 
@@ -33,11 +36,14 @@ router.post(
     console.log("We got content: " + local_content);
     console.log("from author: " + curr_user);
 
-    req.app.get("poststore").push({
-      author: curr_user,
-      content: local_content
-    });
-
+    if (!local_content) {
+      res.render("/posts");
+    } else {
+      req.app.get("poststore").push({
+        author: curr_user,
+        content: local_content
+      });
+    }
     res.redirect("/posts");
   }
 );

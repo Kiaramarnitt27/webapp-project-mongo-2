@@ -6,7 +6,7 @@ const User = require("../models/db");
 const { sanitizeBody } = require("express-validator");
 
 router.get("/", function(req, res, next) {
-  res.render("signin", { title: "Sign In" });
+  res.render("signup", { title: "Sign Up" });
 });
 
 //New User
@@ -37,7 +37,7 @@ router.post(
     }
 
     if (signin_errors.length > 0) {
-      res.render("signin", {
+      res.render("signup", {
         signin_errors,
         username,
         email,

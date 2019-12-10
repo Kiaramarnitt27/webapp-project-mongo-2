@@ -17,8 +17,9 @@ var mongoose = require("mongoose");
 var indexRouter = require("./routes/index");
 var postsRouter = require("./routes/posts");
 var mypageRouter = require("./routes/mypage");
-var signinRouter = require("./routes/signin");
+var signupRouter = require("./routes/signup");
 var loginRouter = require("./routes/login");
+var logoutRouter = require("./routes/logout");
 
 // Start the app itself - default
 var app = express();
@@ -38,8 +39,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/posts", postsRouter);
 app.use("/mypage", mypageRouter);
-app.use("/signin", signinRouter);
+app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
+app.use("/logout", logoutRouter);
 
 // Setting up a global var for data storage - this is extremely poor and hacky way, but works
 app.set("poststore", []);

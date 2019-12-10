@@ -6,7 +6,7 @@ block content
       a(class='left brand-logo') LUT-Blog
       ul(id='nav-mobile', class='right')
         li
-          a(href='./') 
+          a(href='../') 
             i(class='material-icons') home
   h5= title
   
@@ -16,31 +16,31 @@ block content
         li #{error.msg}
 
   div(class='row center') 
-  form(method='POST' action='/signin/create' class='col s12 m6 l6' ) 
+  form(method='POST' action='/signup/create') 
             div.form-group(class='row')
               //-New Username
-              div(class='col s2 m2 l2')
+              div(class='col s2 m2 l1')
                 i(class='medium material-icons circle') person      
-              div(class='col s10 m4 l4')
+              div(class='col s10 m4 l5')
+                label(for='user') User Name: 
                 input.form-control(type='text', placeholder='New Username' name='username' class='validate')
-                label(for='user') User Name:
               //-Email
-              div(class='col s2 m2 l2')
+              div(class='col s2 m2 l1')
                 i(class='medium material-icons circle') email      
-              div(class='col s10 m4 l4')
+              div(class='col s10 m4 l5')
                 label(for='email') Email:
                 input.form-control(type='email', placeholder='Email' name='email' class='validate')    
             div.form-group(class='row')
               //-Password
-              div(class='col s2 m2 l2')
+              div(class='col s2 m2 l1')
                 i(class='medium material-icons circle') lock      
-              div(class='col s10 m4 l4')
+              div(class='col s10 m4 l5')
                 label(for='password') Password:
                 input.form-control(type='password', placeholder='Password' name='password' class='validate')
               //-Confirm Password
-              div(class='col s2 m2 l2')
+              div(class='col s2 m2 l1')
                 i(class='medium material-icons circle') lock      
-              div(class='col s10 m4 l4')
+              div(class='col s10 m4 l5')
                 label(for='password') Confirm Password:
                 input.form-control(type='password', placeholder='Password' name='password2' class='validate')
-            button.btn.btn-primary(type='submit') Sign In
+            button.btn.btn-primary(type='submit') Sign Up
