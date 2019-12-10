@@ -3,6 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
+  //Check if there is a current account logged in
   var curr_user = req.app.get("user");
   if (curr_user) {
     res.redirect("../posts");

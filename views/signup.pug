@@ -10,9 +10,9 @@ block content
             i(class='material-icons') home
   h5= title
   
-  if signin_errors
+  if signup_errors
     ul
-      each error in signin_errors
+      each error in signup_errors
         li #{error.msg}
 
   div(class='row center') 

@@ -10,13 +10,13 @@ router.get("/", function(req, res, next) {
   // Retreiving the posts from the global var
   var authors_and_posts = req.app.get("poststore");
   var curr_user = req.app.get("user");
-
+  //Verify there is account logged in
   if (!curr_user) {
     res.redirect("../");
   }
-
+  //Select only user posts
   var myposts = [];
-  for (var i = 0; i < authors_and_posts.length; i++) {
+  for (var i = authors_and_posts.length - 1; i > -1; i--) {
     if (authors_and_posts[i].author === curr_user) {
       myposts.push({
         author: curr_user,
@@ -32,9 +32,7 @@ router.get("/", function(req, res, next) {
   });
 });
 
-// Sanitation middleware
-// See https://express-validator.github.io/docs/sanitization-chain-api.html
-// And https://express-validator.github.io/docs/filter-api.html
+// Crete new post
 router.post(
   "/create",
   sanitizeBody("*")
@@ -45,10 +43,11 @@ router.post(
     var curr_user = req.app.get("user");
     console.log("We got content: " + local_content);
     console.log("from author: " + curr_user);
-
+    //Check that there is content in post
     if (!local_content) {
       res.render("/mypage");
     } else {
+      //Save new post
       req.app.get("poststore").push({
         author: curr_user,
         content: local_content

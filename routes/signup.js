@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/db");
 
 // Good validation documentation available at https://express-validator.github.io/docs/
 const { sanitizeBody } = require("express-validator");
@@ -16,35 +15,46 @@ router.post(
     .trim()
     .escape(),
   function(req, res, next) {
-    //Retrieve sing in info
+    //Retrieve sing up info
     const { username, email, password, password2 } = req.body;
-    let signin_errors = [];
+    var users = req.app.get("userstore");
+    let signup_errors = [];
     //Check Validation
     if (!username || !password || !password2) {
-      signin_errors.push({ msg: "Please enter username" });
+      signup_errors.push({ msg: "Please enter username" });
     }
 
     if (!email || !password || !password2) {
-      signin_errors.push({ msg: "Please enter email" });
+      signup_errors.push({ msg: "Please enter email" });
     }
 
     if (password !== password2) {
-      signin_errors.push({ msg: "Passwords do not match" });
+      signup_errors.push({ msg: "Passwords do not match" });
     }
 
     if (password.length < 8) {
-      signin_errors.push({ msg: "Password must be at least 8 characters" });
+      signup_errors.push({ msg: "Password must be at least 8 characters" });
     }
-
-    if (signin_errors.length > 0) {
+    //Check if username or email are already in storage
+    for (var i = 0; i < users.length; i++) {
+      if (users[i].username === username) {
+        signup_errors.push({ msg: "Username already exists" });
+      }
+      if (users[i].email === email) {
+        signup_errors.push({ msg: "Email already has an account" });
+      }
+    }
+    //Send errors to browser
+    if (signup_errors.length > 0) {
       res.render("signup", {
-        signin_errors,
+        signup_errors,
         username,
         email,
         password,
         password2
       });
     } else {
+      //Save new User
       req.app.get("userstore").push({
         username: username,
         email: email,

@@ -3,10 +3,12 @@ const router = express.Router();
 
 // Good validation documentation available at https://express-validator.github.io/docs/
 const { sanitizeBody } = require("express-validator");
+//Get login page
 router.get("/", function(req, res, next) {
   res.render("login", { title: "Log In" });
 });
 
+//Validate Login
 router.post(
   "/check",
   sanitizeBody("*")

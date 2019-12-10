@@ -3,15 +3,7 @@ var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
-//body parser??
 var logger = require("morgan");
-var expressValidator = require("express-session");
-var flash = require("connect-flash");
-var session = require("express-session");
-var passport = require("passport");
-var LocalStrategy = require("passport-local"),
-  Strategy;
-var mongoose = require("mongoose");
 
 // Include external files (edit as required)
 var indexRouter = require("./routes/index");
@@ -47,37 +39,6 @@ app.use("/logout", logoutRouter);
 app.set("poststore", []);
 app.set("user");
 app.set("userstore", []);
-
-//To be changed with MongoDB
-mongoose.connect(
-  "mongodb+srv://user:lut2019@webapp-wvh1z.mongodb.net/test?retryWrites=true&w=majority"
-);
-var db = mongoose.connection;
-
-//Express Session
-app.use(
-  session({
-    secret: "secret",
-    saveUninitialized: true,
-    resave: true
-  })
-);
-
-//Passport Init
-app.use(passport.initialize());
-app.use(passport.session());
-
-//Express Validator??
-
-//Connect Flash
-app.use(flash());
-// Global variables
-app.use(function(req, res, next) {
-  res.locals.success_msg = req.flash("success_msg");
-  res.locals.error_msg = req.flash("error_msg");
-  res.locals.error = req.flash("error");
-  next();
-});
 
 // Catch 404 and forward to error handler - default
 app.use(function(req, res, next) {
