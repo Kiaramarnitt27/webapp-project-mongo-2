@@ -9,7 +9,7 @@ const { sanitizeBody } = require("express-validator");
 router.get("/", function(req, res, next) {
   // Retreiving the posts from the global var
   var authors_and_posts = req.app.get("poststore");
-  var curr_user = req.app.get("user");
+  var curr_user = req.session.user;
   //Verify there is account logged in
   if (!curr_user) {
     res.redirect("../");
@@ -40,7 +40,7 @@ router.post(
     .escape(),
   function(req, res, next) {
     var local_content = req.body.content;
-    var curr_user = req.app.get("user");
+    var curr_user = req.session.user;
     console.log("We got content: " + local_content);
     console.log("from author: " + curr_user);
     //Check that there is content in post

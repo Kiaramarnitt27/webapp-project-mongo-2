@@ -4,6 +4,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var expressSession = require("express-session");
 
 // Include external files (edit as required)
 var indexRouter = require("./routes/index");
@@ -26,7 +27,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
+app.use(
+  expressSession({ secret: "max", saveUninitialized: false, resave: false })
+);
 // Define routes (edit as required)
 app.use("/", indexRouter);
 app.use("/posts", postsRouter);
@@ -34,6 +37,8 @@ app.use("/mypage", mypageRouter);
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);
+app.use("/login/check", logoutRouter);
+app.use("/signup/create", logoutRouter);
 
 // Setting up a global var for data storage - this is extremely poor and hacky way, but works
 app.set("poststore", []);

@@ -5,6 +5,11 @@ const router = express.Router();
 const { sanitizeBody } = require("express-validator");
 //Get login page
 router.get("/", function(req, res, next) {
+  //Check if there is a current account logged in
+  var curr_user = req.session.user;
+  if (curr_user) {
+    res.redirect("../posts");
+  }
   res.render("login", { title: "Log In" });
 });
 
@@ -24,7 +29,7 @@ router.post(
         users_and_info[i].username === login_username &&
         users_and_info[i].password === login_password
       ) {
-        req.app.set("user", login_username);
+        req.session.user = login_username;
         res.redirect("/posts");
       }
     }

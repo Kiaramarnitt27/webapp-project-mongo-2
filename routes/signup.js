@@ -5,6 +5,11 @@ const router = express.Router();
 const { sanitizeBody } = require("express-validator");
 
 router.get("/", function(req, res, next) {
+  //Check if there is a current account logged in
+  var curr_user = req.session.user;
+  if (curr_user) {
+    res.redirect("../posts");
+  }
   res.render("signup", { title: "Sign Up" });
 });
 
