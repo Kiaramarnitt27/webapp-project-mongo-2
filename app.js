@@ -27,6 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+//Session
 app.use(
   expressSession({ secret: "max", saveUninitialized: false, resave: false })
 );
@@ -40,9 +41,8 @@ app.use("/logout", logoutRouter);
 app.use("/login/check", logoutRouter);
 app.use("/signup/create", logoutRouter);
 
-// Setting up a global var for data storage - this is extremely poor and hacky way, but works
+// Setting up a global var for data storage
 app.set("poststore", []);
-app.set("user");
 app.set("userstore", []);
 
 // Catch 404 and forward to error handler - default
